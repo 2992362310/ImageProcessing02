@@ -1,0 +1,50 @@
+﻿<Window x:Class="ImageProcessing02.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImageProcessing02"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40px" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50px" />
+            <RowDefinition Height="5px" />
+        </Grid.RowDefinitions>
+
+        <Menu Padding="10px">
+            <MenuItem Name="fileMenuItem" Header="文件" Click="FileMenuItem_Click" >
+                <MenuItem Header="打开图片"/>
+                <MenuItem Header="退出"/>
+            </MenuItem>
+            <MenuItem Name="toolMenuItem" Header="工具" Click="ToolMenuItem_Click" >
+                <MenuItem Header="暗角"/>
+                <MenuItem Header="亮度" />
+                <MenuItem Header="去色" />
+                <MenuItem Header="浮雕" />
+                <MenuItem Header="马赛克" />
+                <MenuItem Header="扩散" />
+            </MenuItem>
+            <MenuItem Header="关于" />
+        </Menu>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Margin="5,5,5,5">
+                <Image Name="originImage"  Margin="0,0,0,0" />
+            </Border>
+            <Border Grid.Column="1" Margin="5,5,5,5">
+                <Image Name="targetImage" Grid.Column="1" Margin="0,0,0,0"/>
+            </Border>
+        </Grid>
+
+        <!--<ProgressBar x:Name="progressBar" Grid.Row="3" Margin="0,0,0,0" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" Value="{Binding Value}"/>-->
+        <ProgressBar x:Name="progressBar" Grid.Row="3" Margin="0,0,0,0" Value="50"/>
+    </Grid>
+</Window>
