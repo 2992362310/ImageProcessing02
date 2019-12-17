@@ -7,15 +7,16 @@ using System.Drawing;
 using System.Windows.Media.Imaging;
 using System.IO;
 using System.Drawing.Imaging;
+using ImageProcessing02.Athorithm;
 
 namespace ImageProcessing02
 {
-    public class ToolClass
+    public class PixelTool
     {
         //暗角
         public static BitmapImage Vignetting(BitmapImage bitmapImage)
         {
-            Bitmap bitmap = BitmapImage2Bitmap(bitmapImage);
+            Bitmap bitmap = HelpClass.BitmapImage2Bitmap(bitmapImage);
 
             int width = bitmap.Width;
             int height = bitmap.Height;
@@ -39,13 +40,13 @@ namespace ImageProcessing02
                 }
             }
 
-            return Bitmap2BitmapImage(bitmap);
+            return HelpClass.Bitmap2BitmapImage(bitmap);
         }
 
         //亮度
         public static BitmapImage Brightness(BitmapImage bitmapImage)
         {
-            Bitmap bitmap = BitmapImage2Bitmap(bitmapImage);
+            Bitmap bitmap = HelpClass.BitmapImage2Bitmap(bitmapImage);
             int red, green, blue;
             Color pixel;
             for(int i = 0; i < bitmap.Width; i++)
@@ -60,14 +61,14 @@ namespace ImageProcessing02
                 }
             }
 
-            return Bitmap2BitmapImage(bitmap);
+            return HelpClass.Bitmap2BitmapImage(bitmap);
         }
 
         //去色
         //gray = 0.3 * R + 0.59 * G + 0.11 * B
         public static BitmapImage Decolorize(BitmapImage bitmapImage)
         {
-            Bitmap bitmap = BitmapImage2Bitmap(bitmapImage);
+            Bitmap bitmap = HelpClass.BitmapImage2Bitmap(bitmapImage);
             int gray;
             Color pixel;
             for(int i = 0; i < bitmap.Width; i++)
@@ -79,13 +80,13 @@ namespace ImageProcessing02
                     bitmap.SetPixel(i, j, Color.FromArgb(gray, gray, gray));
                 }
             }
-            return Bitmap2BitmapImage(bitmap);
+            return HelpClass.Bitmap2BitmapImage(bitmap);
         }
 
         //浮雕
         public static BitmapImage Relief(BitmapImage bitmapImage)
         {
-            Bitmap bitmap = BitmapImage2Bitmap(bitmapImage);
+            Bitmap bitmap = HelpClass.BitmapImage2Bitmap(bitmapImage);
             int red, green, blue;
             Color pixel;
             for(int i = 0; i < bitmap.Width; i++)
@@ -99,13 +100,13 @@ namespace ImageProcessing02
                     bitmap.SetPixel(i, j, Color.FromArgb(red, green, blue));
                 }
             }
-            return Bitmap2BitmapImage(bitmap);
+            return HelpClass.Bitmap2BitmapImage(bitmap);
         }
 
         //马赛克
         public static BitmapImage Mosaic(BitmapImage bitmapImage)
         {
-            Bitmap bitmap = BitmapImage2Bitmap(bitmapImage);
+            Bitmap bitmap = HelpClass.BitmapImage2Bitmap(bitmapImage);
             int RIDIO = 50;
             for(int h=0; h < bitmap.Height; h += RIDIO)
             {
@@ -138,13 +139,13 @@ namespace ImageProcessing02
                     }
                 }
             }
-            return Bitmap2BitmapImage(bitmap);
+            return HelpClass.Bitmap2BitmapImage(bitmap);
         }
 
         //扩散
         public static BitmapImage Biffusion(BitmapImage bitmapImae)
         {
-            Bitmap bitmap = BitmapImage2Bitmap(bitmapImae);
+            Bitmap bitmap = HelpClass.BitmapImage2Bitmap(bitmapImae);
             int red, green, blue;
             int flag = 0;
             Color pixel;
@@ -167,37 +168,7 @@ namespace ImageProcessing02
                     bitmap.SetPixel(i, j, Color.FromArgb(red, green, blue));
                 }
             }
-            return Bitmap2BitmapImage(bitmap);
-        }
-
-        private static Bitmap BitmapImage2Bitmap(BitmapImage bitmapImage)
-        {
-            using(MemoryStream stream = new MemoryStream())
-            {
-                BitmapEncoder enc = new BmpBitmapEncoder();
-                enc.Frames.Add(BitmapFrame.Create(bitmapImage));
-                enc.Save(stream);
-                Bitmap bitmap = new Bitmap(stream);
-
-                return new Bitmap(bitmap);
-            }
-        }
-
-        private static BitmapImage Bitmap2BitmapImage(Bitmap bitmap)
-        {
-            using(MemoryStream stream = new MemoryStream())
-            {
-                bitmap.Save(stream, ImageFormat.Png);
-
-                stream.Position = 0;
-                BitmapImage bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.StreamSource = stream;
-                bitmapImage.EndInit();
-                bitmapImage.Freeze();
-                return bitmapImage;
-            }
+            return HelpClass.Bitmap2BitmapImage(bitmap);
         }
     }
 }

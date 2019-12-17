@@ -17,15 +17,37 @@
         <Menu Padding="10px">
             <MenuItem Name="fileMenuItem" Header="文件" Click="FileMenuItem_Click" >
                 <MenuItem Header="打开图片"/>
+                <MenuItem Header="另存" />
                 <MenuItem Header="退出"/>
             </MenuItem>
-            <MenuItem Name="toolMenuItem" Header="工具" Click="ToolMenuItem_Click" >
+            <MenuItem Name="toolMenuItem" Header="像素处理" Click="ToolMenuItem_Click" >
                 <MenuItem Header="暗角"/>
                 <MenuItem Header="亮度" />
                 <MenuItem Header="去色" />
                 <MenuItem Header="浮雕" />
                 <MenuItem Header="马赛克" />
                 <MenuItem Header="扩散" />
+            </MenuItem>
+            <MenuItem Name="PixlTool" Header="内存处理" Click="PixelTool_Click" >
+                <MenuItem Header="暗角"/>
+                <MenuItem Header="亮度"/>
+                <MenuItem Header="去色"/>
+                <MenuItem Header="二值化"/>
+                <MenuItem Header="浮雕"/>
+                <MenuItem Header="马赛克"/>
+                <MenuItem Header="扩散"/>
+            </MenuItem>
+            <MenuItem x:Name="tool2MenuItem" Header="下一步处理">
+                <MenuItem Header="去雾"/>
+                <MenuItem Header="对比度增强"/>
+                <MenuItem Header="无损放大"/>
+                <MenuItem Header="黑白上色"/>
+                <MenuItem Header="拉伸恢复"/>
+                <MenuItem Header="风格转换"/>
+                <MenuItem Header="修复"/>
+            </MenuItem>
+            <MenuItem x:Name="HistTool" Header="直方图" Click="HistTool_Click">
+                <MenuItem Header="灰度直方图"/>
             </MenuItem>
             <MenuItem Header="关于" />
         </Menu>
@@ -42,6 +64,11 @@
             <Border Grid.Column="1" Margin="5,5,5,5">
                 <Image Name="targetImage" Grid.Column="1" Margin="0,0,0,0"/>
             </Border>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Label Content="耗时：" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="30" Width="80"/>
+            <TextBox Name="timeBox" HorizontalAlignment="Left" Height="23" Margin="95,14,0,0" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="120"/>
         </Grid>
 
         <!--<ProgressBar x:Name="progressBar" Grid.Row="3" Margin="0,0,0,0" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" Value="{Binding Value}"/>-->

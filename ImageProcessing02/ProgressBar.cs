@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ImageProcessing02
 {
-    class Progress : INotifyPropertyChanged
+    class ProgressBar : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
